@@ -1,0 +1,3 @@
+import type { Metadata } from 'next'; import './globals.css'; import { Footer, Header } from '@/components/SiteChrome';
+export const metadata:Metadata={metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL||'https://court-report.example'),title:{default:'Court Report — Tennis, thoughtfully covered.',template:'%s | Court Report'},description:'A thoughtful tennis journal for people who stay for the fifth set.',openGraph:{type:'website',siteName:'Court Report',images:['/images/court-report-hero.png']}};
+export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body><Header/><main>{children}</main><Footer/></body></html>}
