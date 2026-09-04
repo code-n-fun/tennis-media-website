@@ -1,3 +1,43 @@
-import {defineField,defineType} from 'sanity';
-const image=()=>defineField({name:'image',title:'Image',type:'image',options:{hotspot:true},fields:[{name:'alt',type:'string',title:'Alternative text'}]});
-export const schemaTypes=[defineType({name:'author',title:'Author',type:'document',fields:[defineField({name:'name',type:'string'}),image(),defineField({name:'bio',type:'text'})]}),defineType({name:'category',title:'Category',type:'document',fields:[defineField({name:'title',type:'string'}),defineField({name:'slug',type:'slug',options:{source:'title'}})]}),defineType({name:'article',title:'Article',type:'document',fields:[defineField({name:'title',type:'string'}),defineField({name:'slug',type:'slug',options:{source:'title}}),defineField({name:'excerpt',type:'text'}),image(),defineField({name:'publishedAt',type:'datetime'}),defineField({name:'author',type:'reference',to:[{type:'author'}]}),defineField({name:'category',type:'reference',to:[{type:'category'}]}),defineField({name:'body',type:'array',of:[{type:'block'}]})]}),defineType({name:'gallery',title:'Gallery',type:'document',fields:[defineField({name:'title',type:'string'}),defineField({name:'photos',type:'array',of:[{type:'image',options:{hotspot:true}}]})]}),defineType({name:'event',title:'Event',type:'document',fields:[defineField({name:'title',type:'string'}),defineField({name:'startsAt',type:'datetime'}),defineField({name:'location',type:'string'}),defineField({name:'description',type:'text'}),defineField({name:'url',type:'url'})]}),defineType({name:'sponsor',title:'Sponsor',type:'document',fields:[defineField({name:'name',type:'string'}),image(),defineField({name:'url',type:'url'}),defineField({name:'placements',type:'array',of:[{type:'string'}]})]}),defineType({name:'siteSettings',title:'Site settings',type:'document',fields:[defineField({name:'clubName',type:'string'}),defineField({name:'contactEmail',type:'string'})]})];
+import { defineField, defineType } from "sanity";
+
+const imageField = () =>
+  defineField({
+    name: "image",
+    title: "Image",
+    type: "image",
+    options: { hotspot: true },
+    fields: [defineField({ name: "alt", title: "Alternative text", type: "string" })],
+  });
+
+export const schemaTypes = [
+  defineType({
+    name: "author",
+    title: "Author",
+    type: "document",
+    fields: [defineField({ name: "name", type: "string" }), imageField(), defineField({ name: "bio", type: "text" })],
+  }),
+  defineType({
+    name: "category",
+    title: "Category",
+    type: "document",
+    fields: [defineField({ name: "title", type: "string" }), defineField({ name: "slug", type: "slug", options: { source: "title" } })],
+  }),
+  defineType({
+    name: "article",
+    title: "Article",
+    type: "document",
+    fields: [
+      defineField({ name: "title", type: "string" }),
+      defineField({ name: "slug", type: "slug", options: { source: "title" } }),
+      defineField({ name: "excerpt", type: "text" }), imageField(),
+      defineField({ name: "publishedAt", type: "datetime" }),
+      defineField({ name: "author", type: "reference", to: [{ type: "author" }] }),
+      defineField({ name: "category", type: "reference", to: [{ type: "category" }] }),
+      defineField({ name: "body", type: "array", of: [{ type: "block" }] }),
+    ],
+  }),
+  defineType({ name: "gallery", title: "Gallery", type: "document", fields: [defineField({ name: "title", type: "string" }), defineField({ name: "photos", type: "array", of: [{ type: "image", options: { hotspot: true } }] })] }),
+  defineType({ name: "event", title: "Event", type: "document", fields: [defineField({ name: "title", type: "string" }), defineField({ name: "startsAt", type: "datetime" }), defineField({ name: "location", type: "string" }), defineField({ name: "description", type: "text" }), defineField({ name: "url", type: "url" })] }),
+  defineType({ name: "sponsor", title: "Sponsor", type: "document", fields: [defineField({ name: "name", type: "string" }), imageField(), defineField({ name: "url", type: "url" }), defineField({ name: "placements", type: "array", of: [{ type: "string" }] })] }),
+  defineType({ name: "siteSettings", title: "Site settings", type: "document", fields: [defineField({ name: "clubName", type: "string" }), defineField({ name: "contactEmail", type: "string" })] }),
+];
